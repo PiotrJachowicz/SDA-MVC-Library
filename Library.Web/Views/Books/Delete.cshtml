@@ -1,0 +1,44 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Delete";
+}
+<h1>Usuwanie</h1>
+<h3>Czy jesteś pewien że chcesz usunąć tą książkę?</h3>
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x=>x.Id)
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.DisplayNameFor(x => x.Title)
+        </div>
+        <div class="col-sm-6">
+            @Model.Title
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.DisplayNameFor(x => x.Author)
+        </div>
+        <div class="col-sm-6">
+            @Model.Author
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.DisplayNameFor(x => x.Genre)
+        </div>
+        <div class="col-sm-6">
+            @Model.Genre.Name
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            @Html.DisplayNameFor(x => x.ProductionYear)
+        </div>
+        <div class="col-sm-6">
+            @Model.ProductionYear
+        </div>
+    </div>
+    <input type="submit" class="btn btn-danger" value="Potwierdź" />
+}
+@Html.ActionLink("Powrót", "Index", "Books", null, new { @class = "btn btn-success" })

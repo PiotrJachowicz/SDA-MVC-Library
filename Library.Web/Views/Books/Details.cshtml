@@ -1,0 +1,31 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Details";
+}
+<h1>@Model.Title</h1>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(x=>x.Author)
+    </div>
+    <div class="col-sm-6">
+        @Model.Author
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(x => x.Genre)
+    </div>
+    <div class="col-sm-6">
+        @Model.Genre.Name
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        @Html.DisplayNameFor(x => x.ProductionYear)
+    </div>
+    <div class="col-sm-6">
+        @Model.ProductionYear
+    </div>
+</div>
+
+@Html.ActionLink("Powrót", "Index", "Books", null, new { @class="btn btn-success" })

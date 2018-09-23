@@ -1,0 +1,29 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Edycja książki</h1>
+
+@using (Html.BeginForm())
+{
+        @Html.HiddenFor(x => x.Id)
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Title, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.Title, new { @class = "col-sm-6 form-control" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Author, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.Author, new { @class = "col-sm-6 form-control" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.ProductionYear, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.ProductionYear, new { @class = "col-sm-6 form-control" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Genre, new { @class = "col-sm-6" })
+        @Html.DropDownListFor(x => x.GenreId, (IEnumerable<SelectListItem>)ViewBag.Genres, new { @class = "col-sm-6 form-control" })
+    </div>
+    <input type="submit" value="Zapisz" />
+
+}
+

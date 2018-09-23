@@ -1,0 +1,34 @@
+﻿@model List<Book>
+@{
+    ViewData["Title"] = "Index";
+}
+<div>
+    @Html.ActionLink("Dodaj książkę", "Create", "Books", null, new { @class="btn btn-primary" })
+</div>
+
+<div>
+    Filtrowanie po gatunku: @Html.DropDownListFor(x => x.First().GenreId, (IEnumerable<SelectListItem>)ViewBag.Genres)
+</div>
+
+<div id="booksListContainer">
+    @{ Html.RenderPartial("_BooksList", Model);}
+</div>
+
+@section Scripts{ 
+    <script>
+        $(function () { 
+            var dropdownElement = $('#GenreId');
+            dropdownElement.change(function () {
+                var genreId = dropdownElement.val();
+                $.get({
+                    url: '@Url.Action("BooksList")' + '?genreId=' + genreId,
+                    success: function (data) {
+                        $('#booksListContainer').html(data);
+
+                    }
+
+                })
+            })
+        })
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿@model List<Book>
+
+@if(Model.Any()){ 
+<table class="table">
+    <thead>
+    <th>@Html.DisplayNameFor(x => x.First().Title)</th>
+    <th>@Html.DisplayNameFor(x => x.First().Author)</th>
+    <th>@Html.DisplayNameFor(x => x.First().Genre)</th>
+    <th>@Html.DisplayNameFor(x => x.First().ProductionYear)</th>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Title</td>
+                <td>@book.Author</td>
+                <td>@book.Genre.Name</td>
+                <td>@book.ProductionYear</td>
+                <td>@Html.ActionLink("Szczegóły", "Details", "Books", new { id = book.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Edycja", "Update", "Books", new { id = book.Id }, new { @class = "btn btn-success" })</td>
+                <td>@Html.ActionLink("Usuń", "Delete", "Books", new { id = book.Id }, new { @class = "btn btn-danger" })</td>
+
+            </tr>
+
+        }
+
+    </tbody>
+</table>
+}
+else{ 
+@: Nie istnieją książki dla podanego gatunku
+}
+

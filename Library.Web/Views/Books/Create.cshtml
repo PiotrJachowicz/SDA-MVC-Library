@@ -1,0 +1,33 @@
+﻿@model Book
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Dodawanie książki</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary("Wiadomość", new { @class="text-danger" })
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Title, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.Title, new { @class = "col-sm-6 form-control" })
+        @Html.ValidationMessageFor(x=>x.Title, "", new { @class="text-danger" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Author, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.Author, new { @class = "col-sm-6 form-control" })
+        @Html.ValidationMessageFor(x => x.Author, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.ProductionYear, new { @class = "col-sm-6" })
+        @Html.EditorFor(x => x.ProductionYear, new { @class = "col-sm-6 form-control" })
+        @Html.ValidationMessageFor(x => x.ProductionYear, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.Genre, new { @class = "col-sm-6" })
+        @Html.DropDownListFor(x => x.GenreId, (IEnumerable<SelectListItem>)ViewBag.Genres, new { @class = "col-sm-6 form-control" })
+        @Html.ValidationMessageFor(x => x.GenreId, "", new { @class = "text-danger" })
+    </div>
+    <input type="submit" value="Zapisz" />
+
+}
+
