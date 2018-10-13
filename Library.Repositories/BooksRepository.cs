@@ -77,8 +77,12 @@ namespace Library.Repositories
 
         public void DeleteBook(int id)
         {
-            var existingBook = _allBooks.FirstOrDefault(x => x.Id == id);
-            _allBooks.Remove(existingBook);
+            using(var context = new LibraryContext())
+            {
+                var bookToBeDeleted = context.Book.Find(id);
+                context.Book.Remove(bookToBeDeleted);
+                context.SaveChanges();
+            }
         }
 
         public IEnumerable<Book> GetBooksByGenreId(int genreId)
