@@ -16,6 +16,7 @@ namespace Library.Database
         }
 
         public virtual DbSet<Book> Book { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Genre> Genre { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -23,7 +24,7 @@ namespace Library.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Server=localhost;Database=Library;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost;Database=library;Trusted_Connection=True;");
             }
         }
 
@@ -46,6 +47,15 @@ namespace Library.Database
                     .HasForeignKey(d => d.GenreId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("fk_genre");
+            });
+
+            modelBuilder.Entity<Customer>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).HasMaxLength(50);
+
+                entity.Property(e => e.Surname).HasMaxLength(50);
             });
 
             modelBuilder.Entity<Genre>(entity =>

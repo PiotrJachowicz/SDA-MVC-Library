@@ -45,25 +45,14 @@ namespace Library.Repositories
             {
                 return context.Book.Include(x => x.Genre).ToList();
             }
-
-
-
-
-
-
-
-
-
-            //using (var db = new LibraryContext())
-            //{
-            //    return db.Book.Include(x=>x.Genre).ToList();
-            //}
-            //return _allBooks.OrderBy(x => x.Id).ToList();
         }
 
         public Book GetBook(int id)
         {
-            return GetBooks().First(x=>x.Id == id);
+            using (var context = new LibraryContext())
+            {
+                return context.Book.Find(id);
+            }
         }
 
         public int AddBook(Book book)
@@ -96,7 +85,7 @@ namespace Library.Repositories
             _allBooks.Remove(existingBook);
         }
 
-        public List<Book> GetBooksByGenreId(int genreId)
+        public IEnumerable<Book> GetBooksByGenreId(int genreId)
         {
             return GetBooks().Where(x => x.GenreId == genreId);
         }
